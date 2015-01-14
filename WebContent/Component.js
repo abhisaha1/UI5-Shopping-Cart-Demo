@@ -23,11 +23,25 @@ sap.ui.core.UIComponent.extend("sap.demo.cart.Component",{
 			    	   subroutes: [
 			    	               {
 			    	            	   pattern: "category/{catIndex}/subcat/{subCatIndex}",
-			    	            	   name: "Products",
-			    	            	   view: "Products",
-			    	            	   targetAggregation: "detailPages"
+			    			    	   name: "Products",
+			    			    	   view: "Products",
+			    			    	   targetAggregation: "detailPages",
+			    	               },
+			    	               {
+			    	            	   pattern: "category/{catIndex}/subcat/{subCatIndex}/product/{productIndex}",
+			    			    	   name: "ProductInfo",
+			    			    	   view: "ProductInfo",
+			    			    	   targetAggregation: "detailPages",
+			    	               },
+			    	               {
+			    	            	   pattern: "Cart",
+			    			    	   name: "Cart",
+			    			    	   view: "Cart",
+			    			    	   targetAggregation: "detailPages",
 			    	               }
-			    	   ]
+			    	               
+    	               ]
+			    	   
 			       },
 			       {
 			    	   pattern: "",

@@ -14,11 +14,9 @@ sap.ui.controller("shoppingcart.SubCategory", {
 	
 	_handleRouteMatched: function(evt) {
 		
-		if(evt.getParameter("name") !== "category") {
-			
+		if("category" !== evt.getParameter("name") && "Products" !== evt.getParameter("name") && "ProductInfo" !== evt.getParameter("name")){
 			return;
-			
-		}
+		} 
 		
 		this.catIndex = evt.getParameter("arguments").catIndex;
 		
@@ -26,31 +24,40 @@ sap.ui.controller("shoppingcart.SubCategory", {
 		
 		this.getView().setBindingContext(context,'products');
 		
+		var list = sap.ui.getCore().byId('slistId');
+		
+		var subCatIndex = evt.getParameter("arguments").subCatIndex;
+		
+		
+		if(subCatIndex !== undefined) {
+			
+			setTimeout(function() {
+				var selectedItem = list.getItems()[subCatIndex];
+				
+				list.setSelectedItem(selectedItem);
+			},100)
+			
+		
+		}
 		
 	},
 	
 	itemSelect: function(evt) {
 		
-		var list = sap.ui.getCore().byId("slistId");
+		var list = sap.ui.getCore().byId('slistId');
 		
 		var sItem = list.getSelectedItem();
 		
 		var oBindingContext = sItem.getBindingContext('products');
 		
-		var path = oBindingContext.sPath;
+		var sPath = oBindingContext.sPath;
 		
-		var start = path.lastIndexOf('/') + 1;
+		var start = sPath.lastIndexOf("/") + 1;
 		
-		var subCatIndex = path.substring(start,path.length);
+		var subCatIndex = sPath.substring(start, sPath.length);
 		
-		this.router.navTo('Products', {catIndex: this.catIndex, subCatIndex: subCatIndex});
+		this.router.navTo("Products", {catIndex: this.catIndex, subCatIndex: subCatIndex});
 		
-	},
-	
-	goBack: function() {
-		
-		this.router.navTo("");
 	}
-
 
 });

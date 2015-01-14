@@ -37,9 +37,8 @@ sap.ui.jsview("shoppingcart.SubCategory", {
 			},
 			headerContent: new sap.m.Button({
 				icon: "sap-icon://cart",
-				press: function() {
-					//
-					
+				press: function(evt) {
+					sap.demo.cart.common.cartPress(evt,oController);
 				}
 			}),
 			content: [oList]

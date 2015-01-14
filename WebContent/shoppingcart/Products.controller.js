@@ -14,11 +14,9 @@ sap.ui.controller("shoppingcart.Products", {
 	
 	_handleRouteMatched: function(evt) {
 		
-		if(evt.getParameter("name") !== "Products") {
-			
+		if("Products" !== evt.getParameter("name")){
 			return;
-			
-		}
+		} 
 		
 		this.catIndex = evt.getParameter("arguments").catIndex;
 		this.subCatIndex = evt.getParameter("arguments").subCatIndex;
@@ -29,7 +27,19 @@ sap.ui.controller("shoppingcart.Products", {
 		
 		
 	},
-
-
-
+	
+	productPress: function(oEvent) {
+		
+		var oBindingContext = oEvent.getSource().getBindingContext('products');
+		
+		var sPath = oBindingContext.sPath;
+		
+		var start = sPath.lastIndexOf("/") + 1;
+		
+		var productIndex = sPath.substring(start, sPath.length);
+		
+		this.router.navTo("ProductInfo", {catIndex: this.catIndex, subCatIndex: this.subCatIndex, productIndex: productIndex})
+		
+	}
+	
 });

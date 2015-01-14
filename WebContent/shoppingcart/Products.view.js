@@ -15,54 +15,49 @@ sap.ui.jsview("shoppingcart.Products", {
 	createContent : function(oController) {
 		
 		var oTable = new sap.m.Table("productsTable",{
-			
 			inset: true,
-			
 			columns: [
-			          
 			          //image
-			          new sap.m.Column({
-			        	  hAlign: "Left",
-			        	  width: "100px",
-			        	  demandPopin: true,
-			        	  popinDisplay: "Block",
-			        	  minScreenWidth: sap.m.ScreenSize.Medium
-			          }),
-			          //title/description
-			          new sap.m.Column({
-			        	  hAlign: "Left",
-			        	  demandPopin: true,
-			        	  popinDisplay: "Block",
-			        	  minScreenWidth: sap.m.ScreenSize.Medium
-			          }),
-			          //Price
-			          new sap.m.Column({
-			        	  hAlign: "Right",
-			        	  width: "100px",
-			        	  demandPopin: true,
-			        	  popinDisplay: "Block",
-			        	  minScreenWidth: sap.m.ScreenSize.Large
-			          }),
-			          //add to cart
-			          new sap.m.Column({
-			        	  hAlign: "Right",
-			        	  width: "100px",
-			        	  demandPopin: true,
-			        	  popinDisplay: "Block",
-			        	  minScreenWidth: sap.m.ScreenSize.Large
-			          })
+			         new sap.m.Column({
+			        	 hAlign: "Left",
+			        	 width: "100px",
+			        	 demandPopin: true,
+			        	 popinDisplay: "Block",
+			        	 minScreenWidth: sap.m.ScreenSize.Medium
+			         }),
+			         //title/desc
+			         new sap.m.Column({
+			        	 hAlign: "Left",
+			        	 demandPopin: true,
+			        	 popinDisplay: "Block",
+			        	 minScreenWidth: sap.m.ScreenSize.Medium
+			         }),
+			         //price
+			         new sap.m.Column({
+			        	 hAlign: "Left",
+			        	 width: "100px",
+			        	 demandPopin: true,
+			        	 popinDisplay: "Block",
+			        	 minScreenWidth: sap.m.ScreenSize.Medium
+			         }),
+			         //button
+			         new sap.m.Column({
+			        	 hAlign: "Left",
+			        	 width: "100px",
+			        	 demandPopin: true,
+			        	 popinDisplay: "Block",
+			        	 minScreenWidth: sap.m.ScreenSize.Medium
+			         }) 
 			          
 			]
-		
 		});
 		
 		var oTemplate = new sap.m.ColumnListItem({
 			type: sap.m.ListType.Active,
 			cells: [
-			        
 			        new sap.m.Image({
 			        	src: "{products>image}",
-			        	height: '100px'
+			        	height: "100px"
 			        }),
 			        
 			        new sap.m.Text({
@@ -75,20 +70,22 @@ sap.ui.jsview("shoppingcart.Products", {
 			        
 			        new sap.m.Button({
 			        	text: "Add to Cart",
-			        	styled: false,
-			        	press: function(evt) {
-			        		sap.demo.cart.common.addToCart(evt,this);
+			        	press: function(e) {
+			        		sap.demo.cart.common.addToCart(e,this);
 			        	}
 			        })
-			        
 			]
-			
 		});
 		
-		oTable.bindAggregation("items","products>product",oTemplate)
+		oTemplate.attachPress(function(evt) {
+			oController.productPress(evt);
+		})
+		
+		oTable.bindAggregation("items","products>product",oTemplate);
+		
 		
  		return new sap.m.Page({
-			title: "Products",
+			title: "Collection",
 			content: [oTable]
 		});
 	}
