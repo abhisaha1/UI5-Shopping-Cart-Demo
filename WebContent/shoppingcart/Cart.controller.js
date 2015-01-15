@@ -5,34 +5,41 @@ sap.ui.controller("shoppingcart.Cart", {
 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
 * @memberOf shoppingcart.Cart
 */
-//	onInit: function() {
-//
-//	},
+	onInit: function() {
+		
+		var context = sap.ui.getCore().byId("app").getModel('cart').getContext('/');
+		this.getView().setBindingContext(context,'cart');
+		
+		
+		this.router = sap.ui.core.UIComponent.getRouterFor(this);
+		this.router.attachRoutePatternMatched(this._handleRouteMatched, this);
+		
+	},
+	
+	_handleRouteMatched: function(evt) {
+		
+		if("Cart" !== evt.getParameter("name")){
+			return;
+		} 
+		
+		var data= sap.ui.getCore().byId("app").getModel("cart").getData();
+		
+		var total = 0;
+		
+		$.each(data.items, function(i,ele) {
+			
+			var price = ele.price;
+			var quantity = ele.quantity;
+			
+			total += price * quantity;
+			
+		});
+		
+		$("#tid").html("<h3>Total: "+ total +"</h3>")
+		
+		
+		
+	},
 
-/**
-* Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
-* (NOT before the first rendering! onInit() is used for that one!).
-* @memberOf shoppingcart.Cart
-*/
-//	onBeforeRendering: function() {
-//
-//	},
-
-/**
-* Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
-* This hook is the same one that SAPUI5 controls get after being rendered.
-* @memberOf shoppingcart.Cart
-*/
-//	onAfterRendering: function() {
-//
-//	},
-
-/**
-* Called when the Controller is destroyed. Use this one to free resources and finalize activities.
-* @memberOf shoppingcart.Cart
-*/
-//	onExit: function() {
-//
-//	}
 
 });

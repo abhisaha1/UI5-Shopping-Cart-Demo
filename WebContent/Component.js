@@ -47,7 +47,16 @@ sap.ui.core.UIComponent.extend("sap.demo.cart.Component",{
 			    	   pattern: "",
 			    	   name: "default",
 			    	   view: "Category",
-			    	   targetAggregation: "masterPages"
+			    	   targetAggregation: "masterPages",
+			    	   subroutes: [
+			    	               {
+			    	            	   pattern: "",
+			    			    	   name: "Welcome",
+			    			    	   view: "Welcome",
+			    			    	   targetAggregation: "detailPages",
+			    	               }
+			    	               
+			    	   ]
 			       } 
 	        ]
 			
