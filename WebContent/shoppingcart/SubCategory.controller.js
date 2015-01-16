@@ -31,13 +31,25 @@ sap.ui.controller("shoppingcart.SubCategory", {
 	
 	itemSelect: function(evt) {
 		
+		var list = sap.ui.getCore().byId("slistId");
+		
+		var sItem = list.getSelectedItem();
+		
+		var oBindingContext = sItem.getBindingContext('products');
+		
+		var path = oBindingContext.sPath;
+		
+		var start = path.lastIndexOf('/') + 1;
+		
+		var subCatIndex = path.substring(start,path.length);
+		
+		this.router.navTo('Products', {catIndex: this.catIndex, subCatIndex: subCatIndex});
 		
 	},
 	
 	goBack: function() {
 		
 		this.router.navTo("");
-		
 	}
 
 

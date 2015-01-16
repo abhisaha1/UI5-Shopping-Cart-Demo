@@ -19,7 +19,15 @@ sap.ui.core.UIComponent.extend("sap.demo.cart.Component",{
 			    	   pattern: "category/{catIndex}",
 			    	   name: "category",
 			    	   view: "SubCategory",
-			    	   targetAggregation: "masterPages"
+			    	   targetAggregation: "masterPages",
+			    	   subroutes: [
+			    	               {
+			    	            	   pattern: "category/{catIndex}/subcat/{subCatIndex}",
+			    	            	   name: "Products",
+			    	            	   view: "Products",
+			    	            	   targetAggregation: "detailPages"
+			    	               }
+			    	   ]
 			       },
 			       {
 			    	   pattern: "",

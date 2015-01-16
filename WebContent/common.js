@@ -6,6 +6,11 @@ sap.demo.cart.common = {
 			
 			alert('metho1 called');
 			
+		},
+		
+		addToCart: function(evt,obj) {
+			
+			
 		}
 		
 }

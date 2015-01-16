@@ -33,15 +33,13 @@ sap.ui.jsview("shoppingcart.SubCategory", {
 			title: "Title",
 			showNavButton: true,
 			navButtonPress: function() {
-				var app = sap.ui.getCore().byId('splitApp');
-				app.backMaster();
-				
 				oController.goBack();
 			},
 			headerContent: new sap.m.Button({
 				icon: "sap-icon://cart",
 				press: function() {
 					//
+					
 				}
 			}),
 			content: [oList]
